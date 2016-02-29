@@ -118,9 +118,9 @@
     <description>José Moreno Zooplus recruitment challenge</description>
     <url>https://zooplus.josemorenoesteban.com</url>
     <inceptionYear>2016</inceptionYear>
-    <licenses>
+    <!--licenses>
         <license></license>
-    </licenses>
+    </licenses-->
     <developers>
         <developer>
             <name>Jose Moreno</name>

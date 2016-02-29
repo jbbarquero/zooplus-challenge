@@ -3,6 +3,7 @@ package com.josemorenoesteban.zooplus.challenge.service.exchange;
 import java.util.Currency;
 import java.util.List;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class Exchange {
@@ -10,9 +11,15 @@ public class Exchange {
     private Currency   base;
     private List<Rate> rates;
     
-    @Data
+    
+    @Data @NoArgsConstructor
     public static class Rate {
         private Currency currency;
         public  Float    exchange;
+
+        public Rate(final Currency currency, final Float exchange) {
+            this.currency = currency;
+            this.exchange = exchange;
+        }
     }
 }

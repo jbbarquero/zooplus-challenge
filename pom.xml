@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -20,6 +21,7 @@
         <javaee-web-api.version>7.0</javaee-web-api.version>
         <spring.version>4.2.4.RELEASE</spring.version>
         <spring-security.version>4.0.3.RELEASE</spring-security.version>
+        <spring-data.version>1.9.0.RELEASE</spring-data.version>
         <lombok.version>1.14.8</lombok.version>
         <jackson.version>2.6.4</jackson.version>
     </properties>
@@ -50,6 +52,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -85,7 +92,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.3.5</version>
                 <configuration>
-                    <imageName>zoopluschallenge</imageName>
+                    <imageName>jomoespe/zoopluschallenge</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>
                         <resource>

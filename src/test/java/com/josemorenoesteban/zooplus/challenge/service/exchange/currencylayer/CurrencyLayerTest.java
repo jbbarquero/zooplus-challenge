@@ -15,7 +15,7 @@ public class CurrencyLayerTest {
     }
 
     @Test public void latest() {
-        Exchange exchange = service.latest();
+        Exchange exchange = service.latest("EUR");
         assertNotNull(exchange);
         assertEquals(Currency.getInstance("USD"), exchange.getBase());
         assertNotNull(exchange.getRates());

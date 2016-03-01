@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.josemorenoesteban.zooplus.challenge.service.exchange.Exchange;
 
-public class OpenExchangeRatesTest {
+public class OpenExchangeRatesIT {
     private OpenExchangeRates service;
     
     @Before public void setup() {

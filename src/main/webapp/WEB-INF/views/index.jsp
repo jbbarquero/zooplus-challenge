@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="style/pure/0.6.0/pure-min.css">
         <title>Zooplus Challenge</title>
     </head>
     <body>

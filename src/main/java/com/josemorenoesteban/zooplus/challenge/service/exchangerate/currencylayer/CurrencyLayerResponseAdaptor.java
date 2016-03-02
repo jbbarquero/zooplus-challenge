@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
 import com.josemorenoesteban.zooplus.challenge.service.exchangerate.ExchangeRateAdaptor;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class CurrencyLayerResponseAdaptor implements ExchangeRateAdaptor<CurrencyLayerResponse> {
@@ -16,13 +18,17 @@ public class CurrencyLayerResponseAdaptor implements ExchangeRateAdaptor<Currenc
             String target = exchangeRate.getKey().substring(3); 
             Float  value  = exchangeRate.getValue();
             
+            String dateDate = response.getDate() != null 
+                            ? response.getDate() 
+                            : LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+            
             ExchangeRate rate = new ExchangeRate();
             rate.setSource(response.getSource());
             rate.setRateTimestamp(response.getTimestamp());
             rate.setTarget(target);
             rate.setRate(value);
-            rate.setRateDate(response.getDate());
-            
+            rate.setRateDate(dateDate);
+
             return rate;
         } else {
             throw new RuntimeException("Message does not have quotes.");

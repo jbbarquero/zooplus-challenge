@@ -18,7 +18,7 @@ public class AppController {
     
     @RequestMapping(value="/", method=GET)
     public String home(final Model model) {
-        model.addAttribute("currencies", exchangeRates.currencies());
+//        model.addAttribute("currencies", exchangeRates.currencies());
 
         return "index"; 
     }
@@ -26,8 +26,8 @@ public class AppController {
     @RequestMapping(value="/rate", method=GET)
     public String rate(@RequestParam("target") final String target, 
                        final Model model) {
-        model.addAttribute("currencies",   exchangeRates.currencies());
-        model.addAttribute("searchs",      exchangeRates.findAll());
+//        model.addAttribute("currencies",   exchangeRates.currencies());
+//TODO        model.addAttribute("searchs",      exchangeRates.findTop10ByRequestTimestamp(Long.MIN_VALUE));
         model.addAttribute("exchangeRate", exchangeService.get("USD", target));
         
         return "index"; 

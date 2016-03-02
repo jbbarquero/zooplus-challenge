@@ -8,6 +8,8 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CurrencyLayerResponseAdaptorTest {
     private CurrencyLayerResponseAdaptor adaptor; // the SUT
@@ -17,7 +19,10 @@ public class CurrencyLayerResponseAdaptorTest {
         adaptor = new CurrencyLayerResponseAdaptor();
     }
     
-    @Test public void canAdaptTestRequest() {
+    @Test 
+    public void canAdaptTestRequest() {
+        String today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        
         CurrencyLayerResponse response = createResponse("USD", "USDEUR", 0.897183F, null, 1455667199L);
         
         ExchangeRate rate = adaptor.adapt(response);
@@ -27,10 +32,11 @@ public class CurrencyLayerResponseAdaptorTest {
         assertEquals("EUR",       rate.getTarget());
         assertEquals(0.897183F,   rate.getRate(), 0.0);
         assertEquals(1455667199L, rate.getRateTimestamp(), 0);
-        assertNull(rate.getRateDate());
+        assertEquals(today,       rate.getRateDate());
     }
     
-    @Test public void canAdaptHistoricalRequest() {
+    @Test 
+    public void canAdaptHistoricalRequest() {
         CurrencyLayerResponse response = createResponse("USD", "USDEUR", 0.897183F, "2016-02-16", 1455667199L);
         
         ExchangeRate rate = adaptor.adapt(response);

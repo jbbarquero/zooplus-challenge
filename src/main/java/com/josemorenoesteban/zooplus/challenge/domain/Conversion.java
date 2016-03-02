@@ -20,6 +20,5 @@ public class Conversion implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date   rateDate;
     private Float  rate;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Long   requestTimestamp;   
 }

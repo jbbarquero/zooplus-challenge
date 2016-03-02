@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 
 import com.josemorenoesteban.zooplus.challenge.ApplicationConfiguration;
 import java.util.List;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -33,23 +32,26 @@ public class ExchangeRateIT {
         exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(),  4f, null));
         exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(),  5f, null));
         exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(),  6f, null));
+        exchangeRates.flush();
+
+        assertEquals(6, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchangeRate"));
+
+        // get the n las elements
+        Pageable topTen = new PageRequest(0, 10, Sort.Direction.DESC, "requestTimestamp"); 
+        List<ExchangeRate> last10 = exchangeRates.findAll(topTen).getContent();
+        assertEquals(6, last10.size());
+
         exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(),  7f, null));
         exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(),  8f, null));
         exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(),  9f, null));
         exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 10f, null));
         exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 11f, null));
         exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 12f, null));
-        exchangeRates.flush();
-
         assertEquals(12, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchangeRate"));
-        
-        final Pageable topTen = new PageRequest(0, 10, Sort.Direction.DESC, "requestTimestamp"); 
-        
-        List<ExchangeRate> last10 = exchangeRates.findAll(topTen).getContent();
+
+        topTen = new PageRequest(0, 10, Sort.Direction.DESC, "requestTimestamp"); 
+        last10 = exchangeRates.findAll(topTen).getContent();
         assertEquals(10, last10.size());
-        
-        last10.forEach(System.out::println);
-        
     }
 
     private ExchangeRate create(String source, String target, Long timestamp, Float rate, 
@@ -57,9 +59,10 @@ public class ExchangeRateIT {
         ExchangeRate newExchangeRate = new ExchangeRate();
         newExchangeRate.setSource(source);
         newExchangeRate.setTarget(target);
-        newExchangeRate.setRequestTimestamp(timestamp);
+        newExchangeRate.setRateTimestamp(timestamp);
         newExchangeRate.setRate(rate);
         newExchangeRate.setRateDate(date);
+        newExchangeRate.setRequestTimestamp(System.currentTimeMillis());
         return newExchangeRate;
     }
 }

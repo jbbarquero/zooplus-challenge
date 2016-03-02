@@ -8,17 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRateRepository;
-import com.josemorenoesteban.zooplus.challenge.service.exchangerate.ExchangeRateService;
+import com.josemorenoesteban.zooplus.challenge.service.ExchangeRateAgent;
+import com.josemorenoesteban.zooplus.challenge.service.GetExchangeRateResponse;
 
 @Controller
 public class AppController {
-    @Autowired private ExchangeRateService    exchangeService;
-    @Autowired private ExchangeRateRepository exchangeRates;
+    @Autowired ExchangeRateAgent exchangeAgent;
     
     @RequestMapping(value="/", method=GET)
     public String home(final Model model) {
-//        model.addAttribute("currencies", exchangeRates.currencies());
+        model.addAttribute("currencies", exchangeAgent.currencies());
+        model.addAttribute("searchs",    exchangeAgent.last());
 
         return "index"; 
     }
@@ -26,9 +26,11 @@ public class AppController {
     @RequestMapping(value="/rate", method=GET)
     public String rate(@RequestParam("target") final String target, 
                        final Model model) {
-//        model.addAttribute("currencies",   exchangeRates.currencies());
-//TODO        model.addAttribute("searchs",      exchangeRates.findTop10ByRequestTimestamp(Long.MIN_VALUE));
-        model.addAttribute("exchangeRate", exchangeService.get("USD", target));
+        GetExchangeRateResponse response = exchangeAgent.get("USD", target);
+        
+        model.addAttribute("currencies", exchangeAgent.currencies());
+        model.addAttribute("searchs",    response.getLatstSearches());
+        model.addAttribute("rate",       response.getCurrent());
         
         return "index"; 
     }

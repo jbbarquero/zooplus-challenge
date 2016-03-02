@@ -26,7 +26,7 @@ public class CurrencyLayerResponseAdaptorTest {
         assertEquals("USD",       rate.getSource());
         assertEquals("EUR",       rate.getTarget());
         assertEquals(0.897183F,   rate.getRate(), 0.0);
-        assertEquals(1455667199L, rate.getRequestTimestamp(), 0);
+        assertEquals(1455667199L, rate.getRateTimestamp(), 0);
         assertNull(rate.getRateDate());
     }
     
@@ -40,7 +40,7 @@ public class CurrencyLayerResponseAdaptorTest {
         assertEquals("EUR",        rate.getTarget());
         assertEquals(0.897183F,    rate.getRate(), 0.0);
         assertEquals("2016-02-16", rate.getRateDate());
-        assertEquals(1455667199L,  rate.getRequestTimestamp(), 0);
+        assertEquals(1455667199L,  rate.getRateTimestamp(), 0);
     }
     
     private CurrencyLayerResponse createResponse(final String source, final String target, 

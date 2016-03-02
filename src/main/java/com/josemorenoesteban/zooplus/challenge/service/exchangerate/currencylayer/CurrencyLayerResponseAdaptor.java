@@ -18,7 +18,7 @@ public class CurrencyLayerResponseAdaptor implements ExchangeRateAdaptor<Currenc
             
             ExchangeRate rate = new ExchangeRate();
             rate.setSource(response.getSource());
-            rate.setRequestTimestamp(response.getTimestamp());
+            rate.setRateTimestamp(response.getTimestamp());
             rate.setTarget(target);
             rate.setRate(value);
             rate.setRateDate(response.getDate());

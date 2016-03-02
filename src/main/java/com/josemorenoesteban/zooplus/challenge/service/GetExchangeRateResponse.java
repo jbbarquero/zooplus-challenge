@@ -1,0 +1,13 @@
+package com.josemorenoesteban.zooplus.challenge.service;
+
+import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor
+public class GetExchangeRateResponse {
+    public List<ExchangeRate> latstSearches;
+    public ExchangeRate       current;
+}

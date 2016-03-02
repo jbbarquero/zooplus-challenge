@@ -22,17 +22,15 @@ public class ExchangeRateIT {
 
     @Test
     public void testSave() {
-        exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 0.85642, null));
-        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 1.2, null));
-        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 1.16478, null));
+        exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 0.85642f, null));
+        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 1.2f, null));
+        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 1.16478f, null));
         exchangeRates.flush();
 
         assertEquals(3, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchangeRate"));  
-        
-        System.out.println("VAMOOOOOSSSS!!!!!!!!");
     }
 
-    private ExchangeRate create(String source, String target, Long timestamp, Double rate, 
+    private ExchangeRate create(String source, String target, Long timestamp, Float rate, 
                                 String date) {
         ExchangeRate newExchangeRate = new ExchangeRate();
         newExchangeRate.setSource(source);

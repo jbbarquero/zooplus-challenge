@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor
 @Entity @IdClass(ExchangeRate.ExchangeRateRequest.class)
 public class ExchangeRate implements Serializable {
     @Id @Column(name = "SOURCE", nullable = false) @NotNull @Size(max=3) 
@@ -21,7 +21,7 @@ public class ExchangeRate implements Serializable {
     @Id @Column(name = "REQUEST_TIMESTAMP", nullable = false) @NotNull
     private Long requestTimestamp;
     @Column(name = "RATE", nullable = false)
-    private Double rate;
+    private Float rate;
     @Column(name = "RATE_DATE", nullable = true) @Size(max=10) 
     private String rateDate;        
     

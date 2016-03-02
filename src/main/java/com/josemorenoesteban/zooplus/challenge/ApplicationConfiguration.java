@@ -1,6 +1,7 @@
 package com.josemorenoesteban.zooplus.challenge;
 
 import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
+import com.josemorenoesteban.zooplus.challenge.service.exchangerate.ExchangeRateAdaptor;
 import static org.springframework.context.annotation.ComponentScan.Filter;
 import static org.springframework.orm.jpa.vendor.Database.H2;
 
@@ -36,11 +37,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @author jomoespe
  */
 @Configuration
-@ComponentScan(basePackageClasses = ApplicationConfiguration.class, 
-               excludeFilters = {
-                   @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class),
-                   @Filter(type = FilterType.ANNOTATION, value = Controller.class)
-                }
+@ComponentScan(basePackageClasses=ApplicationConfiguration.class, 
+    excludeFilters={
+        @Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class),
+        @Filter(type=FilterType.ANNOTATION, value=Controller.class)
+    }
 )
 @EnableJpaRepositories(basePackages = {"com.josemorenoesteban.zooplus.challenge.domain"})
 public class ApplicationConfiguration {

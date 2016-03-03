@@ -20,6 +20,5 @@ public class UserAgentIT {
     @Test
     public void canCreateAndUser() {
         assertTrue( userAgent.signup("jomoespe@gmail.com", "thePassword") );
-        assertTrue( userAgent.exist("jomoespe@gmail.com", "thePassword") );
     }
 }

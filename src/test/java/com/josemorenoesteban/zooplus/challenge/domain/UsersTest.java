@@ -23,9 +23,9 @@ import com.josemorenoesteban.zooplus.challenge.ApplicationConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=ApplicationConfiguration.class)
-public class SystemUsersTest {
+public class UsersTest {
     
-    @Autowired private SystemUserRepository systemUsers;
+    @Autowired private UsersRepository systemUsers;
     @Autowired private JdbcTemplate         jdbcTemplate;
 
     @Test
@@ -34,21 +34,20 @@ public class SystemUsersTest {
                                                         InvalidKeyException {
         systemUsers.save(create("jomoespe@gmail.com", "password"));
         systemUsers.save(create("dparra@gmail.com",   "another"));
+        systemUsers.save(create("eroldan@gmail.com",  "saurio"));
         
-        assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "systemUser"));
-
-        assertEquals(1, systemUsers.countByEmailAndPassword("jomoespe@gmail.com", systemUsers.encrypt("password")));
-        assertEquals(0, systemUsers.countByEmailAndPassword("jomoespe@gmail.com", systemUsers.encrypt("nop")));
-        assertEquals(1, systemUsers.countByEmailAndPassword("dparra@gmail.com",   systemUsers.encrypt("another")));
+        assertEquals(4, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
         
         
-        System.out.println(systemUsers.encrypt("password"));
+        System.out.printf(">>>>>>>>>>>> [%s]",systemUsers.encrypt("password"));
+        
     }
 
-    private SystemUser create(String email, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        SystemUser newUser = new SystemUser();
+    private Users create(String email, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+        Users newUser = new Users();
         newUser.setEmail(email);
         newUser.setPassword(systemUsers.encrypt(password));
+        newUser.setEnabled(Boolean.TRUE);
         return newUser;
     }
 }

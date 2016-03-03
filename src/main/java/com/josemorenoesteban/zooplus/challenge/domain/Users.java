@@ -10,10 +10,13 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor
 @Entity 
-public class SystemUser implements Serializable {
-    @Id @Column(name="EMAIL", nullable=false) @NotNull
+public class Users implements Serializable {
+    @Id @Column(name="email", nullable=false) @NotNull
     private String email;
     
-    @Column(name="PASSWORD", nullable=false) @NotNull
+    @Column(name="password", nullable=false) @NotNull
     private String password;
+
+    @Column(name="enabled", nullable=false) @NotNull
+    private Boolean enabled;
 }

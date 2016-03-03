@@ -1,5 +1,6 @@
 package com.josemorenoesteban.zooplus.challenge;
 
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,11 +16,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    
+    @Autowired DataSource dataSource;
+    
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("user").password("ondaway").roles("USER").and()
-            .withUser("pepe").password("potamo").roles("USER");
+        auth.jdbcAuthentication().dataSource(dataSource)
+            //.passwordEncoder(new BCryptPasswordEncoder())
+            .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email=?")
+            .authoritiesByUsernameQuery("SELECT email, 'user' FROM users WHERE email=?");
     }    
     
     @Override
@@ -29,15 +34,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/style/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/scripts/**").permitAll()
-                .anyRequest().authenticated() //hasAnyRole("USER")//
+                .anyRequest().authenticated() //hasAnyRole("user")//
                 .and()
             .formLogin()
                 .loginPage("/signin")
                 .defaultSuccessUrl("/")
                 .failureUrl("/signin?error")
-                .usernameParameter("username").passwordParameter("password")
-                .permitAll()
+                .usernameParameter("username").passwordParameter("password").permitAll()
                 .and()
-            .logout().logoutSuccessUrl("/signin?logout");
+            .logout().logoutSuccessUrl("/signin?logout").and()
+	    .exceptionHandling().accessDeniedPage("/403").and()
+            .csrf();
     }
 }

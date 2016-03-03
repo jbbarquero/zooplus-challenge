@@ -44,7 +44,11 @@ public class ApplicationConfiguration {
     @Bean
     public EmbeddedDatabase dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2);
-        EmbeddedDatabase database = builder.setName("testdb").build();
+        EmbeddedDatabase database = builder
+                .setName("testdb")
+                .addScript("/scripts/users.ddl.sql")
+                .addScript("/scripts/test_users.dml.sql")
+                .build();
         return database;
     }
 

@@ -1,14 +1,11 @@
 package com.josemorenoesteban.zooplus.challenge;
 
-import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
-import com.josemorenoesteban.zooplus.challenge.service.exchangerate.ExchangeRateAdaptor;
 import static org.springframework.context.annotation.ComponentScan.Filter;
 import static org.springframework.orm.jpa.vendor.Database.H2;
 
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.context.annotation.Bean;
-
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -25,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
+
 /**
  * Es la clase de configuración de la aplicación de srping.
  * 
@@ -32,9 +31,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * Como hace un ComponentScan el carga todos los que se encuentre.
  * 
  * Es equivalente a /WEB-INF/spring-core-config.xml
- *
- * @author jbeneito
- * @author jomoespe
  */
 @Configuration
 @ComponentScan(basePackageClasses=ApplicationConfiguration.class, 

@@ -1,0 +1,13 @@
+@import 'pure/0.6.0/pure-min.css';
+
+h1 {
+    background-image: url("images/zooplus_logo.png");
+    background-repeat: no-repeat;
+    color: transparent;
+    height: 56px;
+}
+
+.button-main {
+    background: rgb(0, 127, 0);
+    color: white;
+}

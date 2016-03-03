@@ -30,10 +30,9 @@ public class ExchangeRateAgent {
         response.setLatstSearches(lastQueries());
 
         currentExchangeRate(response, source, target);
-        if (response.hasIssue(NO_CONNECTION_TO_SERVER)) {
+        if (!response.hasIssues()) {
             response.getCurrent().setRequestTimestamp(System.currentTimeMillis());
             exchangeRates.save(response.getCurrent());
-            response.getIssues().add(NO_CONNECTION_TO_SERVER);
         }
         return response;
     }

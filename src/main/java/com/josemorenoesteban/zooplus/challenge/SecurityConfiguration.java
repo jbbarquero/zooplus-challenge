@@ -18,7 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-            .withUser("user").password("ondaway").roles("USER");
+            .withUser("user").password("ondaway").roles("USER").and()
+            .withUser("pepe").password("potamo").roles("USER");
     }    
     
     @Override
@@ -28,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/style/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/scripts/**").permitAll()
-                .anyRequest().hasAnyRole("USER")//.authenticated()
+                .anyRequest().authenticated() //hasAnyRole("USER")//
                 .and()
-            .formLogin().loginPage("/signup").permitAll().and()
+            .formLogin()/*.loginPage("/signup")*/.permitAll().and()
             //.httpBasic().and()
             .logout().permitAll();
     }

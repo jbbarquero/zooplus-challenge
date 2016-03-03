@@ -18,6 +18,12 @@
             <input type="submit" value="Log out" />
         </form>
         --%>
+        
+        <form id="logout" action="logout" method="post" >
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button>logout</button>
+        </form>
+        
         <div id="form_container"class="pure-g">
             <div class="pure-u-1-8"></div>
             <div class="pure-u">
@@ -31,6 +37,11 @@
                     <button class="pure-button button-main">Get rate</button>
                     <fieldset>
                     <label>1 USD = <strong>${rate.rate}</strong> ${rate.target}</label>
+                    
+                    <%-- Para mostras los errores
+                    <c:if test="${not empty error}"><div>${error}</div></c:if>
+                    <c:if test="${not empty message}"><div>${message}</div></c:if>
+                    --%>
                 </form>
             </div>
             <div class="pure-u-1-8"></div>                

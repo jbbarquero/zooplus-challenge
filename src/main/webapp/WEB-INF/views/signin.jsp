@@ -26,7 +26,7 @@
         </div--%>
 
         <h2>Log In</h2>
-        <form name="f" action="login" method="post" class="pure-form">
+        <form name="f" action="signin" method="post" class="pure-form">
             <fieldset class="pure-group">
                 <input type="text" name="username" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">

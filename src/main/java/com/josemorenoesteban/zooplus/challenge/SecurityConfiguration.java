@@ -31,8 +31,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/scripts/**").permitAll()
                 .anyRequest().authenticated() //hasAnyRole("USER")//
                 .and()
-            .formLogin()/*.loginPage("/signup")*/.permitAll().and()
-            //.httpBasic().and()
-            .logout().permitAll();
+            .formLogin()
+                .loginPage("/signin")
+                .defaultSuccessUrl("/")
+                .failureUrl("/signin?error")
+                .usernameParameter("username").passwordParameter("password")
+                .permitAll()
+                .and()
+            .logout().logoutSuccessUrl("/signin?logout");
     }
 }

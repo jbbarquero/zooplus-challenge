@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.josemorenoesteban.zooplus.challenge.service.ExchangeRateAgent;
 import com.josemorenoesteban.zooplus.challenge.service.GetExchangeRateResponse;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
@@ -37,8 +38,19 @@ public class AppController {
         return "index"; 
     }
 
-    @RequestMapping(value="/signup", method=GET)
-    public String signup(final Model model) {
-        return "signup"; // se retorna el nombre de la vista lógica
+    @RequestMapping(value="/signin", method=GET)
+    public ModelAndView loginPage(@RequestParam(value="error", required=false) String error,
+                                  @RequestParam(value="logout",required=false) String logout) {
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Invalid Credentials provided.");
+        }
+ 
+        if (logout != null) {
+            model.addObject("message", "Logged out from Challenge successfully.");
+        }
+ 
+        model.setViewName("signin");
+        return model;
     }
 }

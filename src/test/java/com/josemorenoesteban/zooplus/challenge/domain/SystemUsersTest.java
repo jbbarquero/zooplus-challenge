@@ -2,6 +2,12 @@ package com.josemorenoesteban.zooplus.challenge.domain;
 
 import static org.junit.Assert.*;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,11 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import com.josemorenoesteban.zooplus.challenge.ApplicationConfiguration;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,14 +26,14 @@ import javax.crypto.NoSuchPaddingException;
 public class SystemUsersTest {
     
     @Autowired private SystemUserRepository systemUsers;
-    @Autowired private  JdbcTemplate         jdbcTemplate;
+    @Autowired private JdbcTemplate         jdbcTemplate;
 
     @Test
     public void canCreateAndCheckIfAnUserExist() throws NoSuchAlgorithmException, NoSuchPaddingException, 
                                                         IllegalBlockSizeException, BadPaddingException, 
                                                         InvalidKeyException {
-        systemUsers.save(create("jomoespe@gmail.com", systemUsers.encrypt("password")));
-        systemUsers.save(create("dparra@gmail.com",   systemUsers.encrypt("another")));
+        systemUsers.save(create("jomoespe@gmail.com", "password"));
+        systemUsers.save(create("dparra@gmail.com",   "another"));
         
         assertEquals(2, JdbcTestUtils.countRowsInTable(jdbcTemplate, "systemUser"));
 
@@ -44,10 +45,10 @@ public class SystemUsersTest {
         System.out.println(systemUsers.encrypt("password"));
     }
 
-    private SystemUser create(String email, String password) {
+    private SystemUser create(String email, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         SystemUser newUser = new SystemUser();
         newUser.setEmail(email);
-        newUser.setPassword(password);
+        newUser.setPassword(systemUsers.encrypt(password));
         return newUser;
     }
 }

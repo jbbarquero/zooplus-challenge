@@ -13,12 +13,14 @@ import com.josemorenoesteban.zooplus.challenge.service.GetExchangeRateResponse;
 
 @Controller
 public class AppController {
-    @Autowired ExchangeRateAgent exchangeAgent;
+    public static final String DEFAULT_SOUCE = "USD";
+    
+    @Autowired private ExchangeRateAgent exchangeAgent;
     
     @RequestMapping(value="/", method=GET)
     public String home(final Model model) {
         model.addAttribute("currencies", exchangeAgent.currencies());
-        model.addAttribute("searchs",    exchangeAgent.last());
+        model.addAttribute("searchs",    exchangeAgent.lastQueries());
 
         return "index"; 
     }
@@ -26,7 +28,7 @@ public class AppController {
     @RequestMapping(value="/rate", method=GET)
     public String rate(@RequestParam("target") final String target, 
                        final Model model) {
-        GetExchangeRateResponse response = exchangeAgent.get("USD", target);
+        GetExchangeRateResponse response = exchangeAgent.get(DEFAULT_SOUCE, target);
         
         model.addAttribute("currencies", exchangeAgent.currencies());
         model.addAttribute("searchs",    response.getLatstSearches());

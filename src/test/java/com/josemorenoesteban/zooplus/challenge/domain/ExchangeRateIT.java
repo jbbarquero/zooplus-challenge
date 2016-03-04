@@ -12,11 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+import org.junit.Ignore;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 public class ExchangeRateIT {

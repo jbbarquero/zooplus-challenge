@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style/pure/0.6.0/pure-min.css">
-        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>Signup for Zooplus Challenge</title>
     </head>
     <body>
@@ -34,16 +34,5 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <button type="submit" class="pure-button pure-button-primary">Log In</button>
         </form>
-                
-            <%--form name='f' action='login' method='POST'>
-                <table>
-                    <tr><td>User:</td><td><input type='text' name='username' value=''></td></tr>
-                    <tr><td>Password:</td><td><input type='password' name='password'/></td></tr>
-                    <tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </table>
-            </form--%>
-                
-                
     </body>
 </html>

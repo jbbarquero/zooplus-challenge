@@ -1,8 +1,8 @@
 package com.josemorenoesteban.zooplus.challenge;
 
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * http://docs.spring.io/spring-security/site/docs/3.2.x/guides/form.html
  * http://o7planning.org/web/fe/default/en/document/29799/simple-login-web-application-using-spring-mvc-spring-security-and-spring-jdbc
  */
-@Configuration
+//@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
@@ -37,13 +37,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() //hasAnyRole("user")//
                 .and()
             .formLogin()
-                .loginPage("/signin")
-                .defaultSuccessUrl("/")
-                .failureUrl("/signin?error")
-                .usernameParameter("username").passwordParameter("password").permitAll()
+//                .loginPage("/signin")
+//                .defaultSuccessUrl("/")
+//                .failureUrl("/signin?error")
+//                .usernameParameter("username").passwordParameter("password").permitAll()
                 .and()
-            .logout().logoutSuccessUrl("/signin?logout").and()
-	    .exceptionHandling().accessDeniedPage("/403").and()
+//            .logout().logoutSuccessUrl("/signin").and()
+//	    .exceptionHandling().accessDeniedPage("/403").and()
             .csrf();
     }
 }

@@ -2,17 +2,19 @@ package com.josemorenoesteban.zooplus.challenge.service.exchangerate;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 
-import com.josemorenoesteban.zooplus.challenge.ApplicationConfiguration;
+import com.josemorenoesteban.zooplus.challenge.Application;
 import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=ApplicationConfiguration.class)
+@SpringApplicationConfiguration(classes=Application.class)
 public class ExchangeRateServiceIT {
     @Autowired private ExchangeRateService rateService;
     

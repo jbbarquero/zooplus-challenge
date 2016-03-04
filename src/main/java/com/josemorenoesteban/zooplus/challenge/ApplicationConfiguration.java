@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,7 +31,7 @@ import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
  * 
  * Es equivalente a /WEB-INF/spring-core-config.xml
  */
-@Configuration
+//@Configuration
 @ComponentScan(basePackageClasses=ApplicationConfiguration.class, 
     excludeFilters={
         @Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class),

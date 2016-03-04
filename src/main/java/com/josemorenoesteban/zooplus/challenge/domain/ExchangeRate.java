@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor
 @Entity @IdClass(ExchangeRate.ExchangeRateRequest.class)
+@Table(name = "ExchangeRate")
 public class ExchangeRate implements Serializable {
     @Id @Column(name="SOURCE", nullable=false) @NotNull @Size(max=3) 
     private String source;

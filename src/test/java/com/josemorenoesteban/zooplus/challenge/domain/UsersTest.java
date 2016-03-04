@@ -9,24 +9,23 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
-import com.josemorenoesteban.zooplus.challenge.ApplicationConfiguration;
-
+import com.josemorenoesteban.zooplus.challenge.Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=ApplicationConfiguration.class)
+@SpringApplicationConfiguration(classes=Application.class)
 public class UsersTest {
     
     @Autowired private UsersRepository systemUsers;
-    @Autowired private JdbcTemplate         jdbcTemplate;
+    @Autowired private JdbcTemplate    jdbcTemplate;
 
     @Test
     public void canCreateAndCheckIfAnUserExist() throws NoSuchAlgorithmException, NoSuchPaddingException, 
@@ -36,7 +35,7 @@ public class UsersTest {
         systemUsers.save(create("dparra@gmail.com",   "another"));
         systemUsers.save(create("eroldan@gmail.com",  "saurio"));
         
-        assertEquals(4, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
+        assertEquals(3, JdbcTestUtils.countRowsInTable(jdbcTemplate, "users"));
         
         
         System.out.printf(">>>>>>>>>>>> [%s]",systemUsers.encrypt("password"));

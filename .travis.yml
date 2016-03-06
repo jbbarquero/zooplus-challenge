@@ -1,6 +1,11 @@
+sudo: required
 language: java
+services:
+  - docker
 jdk:
   - oraclejdk8
-  #- openjdk8
-#sudo: false
+before_install:
+  - docker build -t jomoespe/zoopluschallenge .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker pull jomoespe/zoopluschallenge
 script: mvn clean verify

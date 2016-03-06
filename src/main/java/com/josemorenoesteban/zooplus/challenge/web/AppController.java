@@ -1,6 +1,7 @@
 package com.josemorenoesteban.zooplus.challenge.web;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.josemorenoesteban.zooplus.challenge.service.ExchangeRateAgent;
 import com.josemorenoesteban.zooplus.challenge.service.GetExchangeRateResponse;
+import com.josemorenoesteban.zooplus.challenge.service.UserAgent;
 
 @Controller
 public class AppController {
     public static final String DEFAULT_SOUCE = "USD";
     
     @Autowired private ExchangeRateAgent exchangeAgent;
+    @Autowired private UserAgent         userAgent;
     
     @RequestMapping(value="/", method=GET)
     public String home(final Model model) {
@@ -50,4 +53,23 @@ public class AppController {
         }
         return "signin";
     }
+
+    @RequestMapping(value="/signup", method=POST)
+    public String signup(@RequestParam(value="firstname", required=false) String firstName,
+                         @RequestParam(value="lastname",  required=false) String lastName,
+                         @RequestParam(value="email",     required=false) String email,
+                         @RequestParam(value="bday",      required=false) String bday,
+                         @RequestParam(value="password",  required=false) String password,
+                         final Model model) {
+        
+        System.out.printf(
+                  "firstname=%s\n"
+                + "lastname=%s\n"
+                + "email=%s\n"
+                + "bday=%s\n"
+                + "password=%s\n\n", firstName, lastName, email, bday, password);
+        
+        return userAgent.signup(email, password) ? "index" : "index";
+    }
+
 }

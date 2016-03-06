@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/scripts/**").permitAll()
                 .antMatchers("/console/**").permitAll()
+                .antMatchers("/signup").permitAll()
                 .anyRequest().authenticated() //hasAnyRole("user")//
                 .and()
                 .formLogin()

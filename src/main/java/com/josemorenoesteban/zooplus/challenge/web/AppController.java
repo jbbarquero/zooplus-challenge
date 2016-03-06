@@ -69,7 +69,7 @@ public class AppController {
                 + "bday=%s\n"
                 + "password=%s\n\n", firstName, lastName, email, bday, password);
         
-        return userAgent.signup(email, password) ? "index" : "index";
+        return userAgent.signup(email, password) ? "index" : "signin";
     }
 
 }

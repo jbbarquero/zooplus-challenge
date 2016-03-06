@@ -4,8 +4,8 @@ services:
   - docker
 jdk:
   - oraclejdk8
-after_install:
+script: mvn clean verify
+after_success:
   - docker build -t jomoespe/zoopluschallenge .
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker pull jomoespe/zoopluschallenge
-script: mvn clean verify

@@ -10,29 +10,39 @@
         <title>Signup for Zooplus Challenge</title>
     </head>
     <body>
-        <h1>Zooplus Challenge</h1>
-        <%--div>
-            <h2>Sign Up</h2>
-            <form>
-                <div><input type="firstname" name="firstname" placeholder="First name"></div>
-                <div><input type="lastname" name="lastname" placeholder="Last name"></div>
-                <div><input type="email" name="email" placeholder="Email"></div>
-                <div><input type="date" name="bday" placeholder="Birth day"></div>
-                <div><input type="password" name="password" placeholder="Password"></div>
-                <div><input type="repassword" name="repassword" placeholder="Re-enter password"></div>
-                <!-- Address (street, zip, city & country)  -->
-                <button>Sign Up</button>
-            </form>
-        </div--%>
-
-        <h2>Log In</h2>
-        <form name="f" action="signin" method="post" class="pure-form">
-            <fieldset class="pure-group">
-                <input type="text" name="username" placeholder="Email">
-                <input type="password" name="password" placeholder="Password">
-            </fieldset>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-            <button type="submit" class="pure-button pure-button-primary">Log In</button>
-        </form>
+        <!--h1>Zooplus Challenge</h1-->
+        <div id="form_container"class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u-3-8">
+                <h2>Log In</h2>
+                <form name="signin" action="signin" method="post" class="pure-form">
+                    <fieldset class="pure-group">
+                        <input type="text" name="username" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password">
+                    </fieldset>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" class="pure-button">Log In</button>
+                </form>
+            </div>
+            <div class="pure-u-3-8">
+                <h2>Sign Up</h2>
+                <form name="signup" action="signup" method="post" class="pure-form">
+                    <fieldset class="pure-group">
+                        <input type="text"  name="firstname"  placeholder="First name">
+                        <input type="text"  name="lastname"   placeholder="Last name">
+                        <input type="email" name="email"      placeholder="Email">
+                        <input type="date"  name="bday"       placeholder="Birth day">
+                    </fieldset>
+                    <fieldset class="pure-group">
+                        <input type="password" name="password"   placeholder="Password">
+                        <input type="password" name="repassword" placeholder="Re-enter password">
+                        <!-- Address (street, zip, city & country)  -->
+                    </fieldset>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+                </form>
+            </div>
+            <div class="pure-u-1-8"></div>
+        </div>
     </body>
 </html>

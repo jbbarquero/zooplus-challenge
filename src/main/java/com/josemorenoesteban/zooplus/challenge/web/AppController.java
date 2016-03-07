@@ -1,6 +1,7 @@
 package com.josemorenoesteban.zooplus.challenge.web;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,5 +50,28 @@ public class AppController {
             model.addAttribute("message", "Logged out from Challenge successfully.");
         }
         return "signin";
+    }
+
+    @RequestMapping(value="/signup", method=POST)
+    public String signup(@RequestParam(value="firstname",  required=false) String firstname,
+                         @RequestParam(value="lastname",   required=false) String lastname,
+                         @RequestParam(value="email",      required=false) String email,
+                         @RequestParam(value="bday",       required=false) String bday,
+                         @RequestParam(value="password",   required=false) String password,
+                         @RequestParam(value="repassword", required=false) String repassword,
+                         final Model model) {
+
+        System.out.println("******************************************************");
+        System.out.println("******************************************************");
+        System.out.printf("firstname=%s\n", firstname);
+        System.out.printf("lastname=%s\n", lastname);
+        System.out.printf("email=%s\n", email);
+        System.out.printf("dbay=%s\n", bday);
+        System.out.printf("password=%s\n", password);
+        System.out.printf("repassword=%s\n", repassword);
+        System.out.println("******************************************************");
+        System.out.println("******************************************************");
+        
+        return "index";
     }
 }

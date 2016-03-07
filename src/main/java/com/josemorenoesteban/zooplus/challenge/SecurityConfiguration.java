@@ -1,5 +1,8 @@
 package com.josemorenoesteban.zooplus.challenge;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/style/**").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/scripts/**").permitAll()
-                .antMatchers("/console/**").permitAll()
+                .antMatchers(GET,  "/favicon.ico", "/style/**").permitAll()
+                .antMatchers(POST, "/signup").permitAll()
                 .anyRequest().authenticated() //hasAnyRole("user")//
                 .and()
                 .formLogin()
@@ -48,31 +48,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutSuccessUrl("/signin")
                     .permitAll()
-                .and()
-                .exceptionHandling()
-                    .accessDeniedPage("/403")
+//                .and()
+//                .exceptionHandling()
+//                    .accessDeniedPage("/403")
                 .and()
                 .csrf();
     }
-    
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/favicon.ico").permitAll()
-//                .antMatchers("/style/**").permitAll()
-//                .antMatchers("/images/**").permitAll()
-//                .antMatchers("/scripts/**").permitAll()
-//                .antMatchers("/console/**").permitAll()
-//                .anyRequest().authenticated() //hasAnyRole("user")//
-//                .and()
-//            .formLogin().permitAll();
-////                .loginPage("/signin")
-////                .defaultSuccessUrl("/")
-////                .failureUrl("/signin?error")
-////                .usernameParameter("username").passwordParameter("password").permitAll()
-////                .and()
-////            .logout().logoutSuccessUrl("/signin").and()
-////	    .exceptionHandling().accessDeniedPage("/403").and()
-////            .csrf();
-//    }
 }

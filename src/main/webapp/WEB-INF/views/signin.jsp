@@ -5,16 +5,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="style/site.css">
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>Signup for Zooplus Challenge</title>
     </head>
     <body>
-        <!--h1>Zooplus Challenge</h1-->
+        <h1>Zooplus Challenge</h1>
         <div id="form_container"class="pure-g">
             <div class="pure-u-1-8"></div>
             <div class="pure-u-3-8">
-                <h2>Log In</h2>
+                <h3>Log In</h3>
                 <form name="signin" action="signin" method="post" class="pure-form">
                     <fieldset class="pure-group">
                         <input type="text" name="username" placeholder="Email">
@@ -25,7 +25,7 @@
                 </form>
             </div>
             <div class="pure-u-3-8">
-                <h2>Sign Up</h2>
+                <h3>Sign Up</h3>
                 <form name="signup" action="signup" method="post" class="pure-form">
                     <fieldset class="pure-group">
                         <input type="text"  name="firstname"  placeholder="First name">

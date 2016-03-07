@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * http://docs.spring.io/spring-security/site/docs/3.2.x/guides/hellomvc.html
@@ -29,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            //.passwordEncoder( new BCryptPasswordEncoder() )
+            .passwordEncoder( new BCryptPasswordEncoder() )
             .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email=?")
             .authoritiesByUsernameQuery("SELECT email, 'user' FROM users WHERE email=?");
         

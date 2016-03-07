@@ -7,8 +7,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             //.passwordEncoder( new BCryptPasswordEncoder() )
             .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email=?")
             .authoritiesByUsernameQuery("SELECT email, 'user' FROM users WHERE email=?");
+        
     }
 
     @Override
@@ -37,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             http.authorizeRequests()
                 .antMatchers(GET,  "/favicon.ico", "/style/**").permitAll()
                 .antMatchers(POST, "/signup").permitAll()
-                .anyRequest().authenticated() //hasAnyRole("user")//
+                .anyRequest().authenticated() // .hasAnyRole("user")
                 .and()
                 .formLogin()
                     .loginPage("/signin")
@@ -54,4 +57,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf();
     }
+
+    @Override 
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+    
 }

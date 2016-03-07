@@ -1,10 +1,48 @@
 @import 'pure/0.6.0/pure-min.css';
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300);
+
+header form {
+    font-size: 10pt;
+    margin-top: 5px;
+    margin-right:20px;
+}
+
+header form input {
+    border: solid 1px #cad2d3;
+    border-radius: 3px;
+}
 
 h1 {
     background-image: url("images/zooplus_logo.png");
     background-repeat: no-repeat;
     color: transparent;
     height: 56px;
+    margin-left: 40px;
+}
+
+h2 {
+    font-family: 'Quicksand', sans-serif;
+    margin-left: 40px;
+    color: rgb(69, 84, 69);
+}
+
+h3 {
+    font-family: 'Quicksand', sans-serif;
+    color: rgb(69, 84, 69);
+}
+
+article {
+    font-family: 'Shadows Into Light', cursive;
+    color: rgb(0, 64, 128);
+    font-size: 16pt;
+    padding: 20px 20px 20px 20px;
+}
+
+article a {
+    color: rgb(0, 64, 128);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(204, 0, 0);
 }
 
 .button-main {

@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.josemorenoesteban.zooplus.challenge.service.ExchangeRateAgent;
 import com.josemorenoesteban.zooplus.challenge.service.GetExchangeRateResponse;
+import com.josemorenoesteban.zooplus.challenge.service.UserAgent;
 
 @Controller
 public class AppController {
     public static final String DEFAULT_SOUCE = "USD";
     
     @Autowired private ExchangeRateAgent exchangeAgent;
+    @Autowired private UserAgent         agentAgent;
     
     @RequestMapping(value="/", method=GET)
     public String home(final Model model) {
@@ -60,18 +62,6 @@ public class AppController {
                          @RequestParam(value="password",   required=false) String password,
                          @RequestParam(value="repassword", required=false) String repassword,
                          final Model model) {
-
-        System.out.println("******************************************************");
-        System.out.println("******************************************************");
-        System.out.printf("firstname=%s\n", firstname);
-        System.out.printf("lastname=%s\n", lastname);
-        System.out.printf("email=%s\n", email);
-        System.out.printf("dbay=%s\n", bday);
-        System.out.printf("password=%s\n", password);
-        System.out.printf("repassword=%s\n", repassword);
-        System.out.println("******************************************************");
-        System.out.println("******************************************************");
-        
-        return "index";
+        return agentAgent.signup(firstname, lastname, email, bday, password) ? "index" : "signin";
     }
 }

@@ -1,14 +1,20 @@
 package com.josemorenoesteban.zooplus.challenge;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * http://docs.spring.io/spring-security/site/docs/3.2.x/guides/hellomvc.html
@@ -24,21 +30,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            //.passwordEncoder( new BCryptPasswordEncoder() )
+            .passwordEncoder( new BCryptPasswordEncoder() )
             .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email=?")
             .authoritiesByUsernameQuery("SELECT email, 'user' FROM users WHERE email=?");
+        
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/style/**").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/scripts/**").permitAll()
-                .antMatchers("/console/**").permitAll()
-                .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated() //hasAnyRole("user")//
+                .antMatchers(GET,  "/favicon.ico", "/style/**").permitAll()
+                .antMatchers(POST, "/signup").permitAll()
+                .anyRequest().authenticated() // .hasAnyRole("user")
                 .and()
                 .formLogin()
                     .loginPage("/signin")
@@ -49,31 +52,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutSuccessUrl("/signin")
                     .permitAll()
-                .and()
-                .exceptionHandling()
-                    .accessDeniedPage("/403")
+//                .and()
+//                .exceptionHandling()
+//                    .accessDeniedPage("/403")
                 .and()
                 .csrf();
     }
+
+    @Override 
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
     
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/favicon.ico").permitAll()
-//                .antMatchers("/style/**").permitAll()
-//                .antMatchers("/images/**").permitAll()
-//                .antMatchers("/scripts/**").permitAll()
-//                .antMatchers("/console/**").permitAll()
-//                .anyRequest().authenticated() //hasAnyRole("user")//
-//                .and()
-//            .formLogin().permitAll();
-////                .loginPage("/signin")
-////                .defaultSuccessUrl("/")
-////                .failureUrl("/signin?error")
-////                .usernameParameter("username").passwordParameter("password").permitAll()
-////                .and()
-////            .logout().logoutSuccessUrl("/signin").and()
-////	    .exceptionHandling().accessDeniedPage("/403").and()
-////            .csrf();
-//    }
 }

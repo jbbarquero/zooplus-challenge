@@ -15,9 +15,11 @@ public class UserAgent {
                           final  String bday, final String password) {
         Users newUser = new Users();
         newUser.setEmail(email);
-        newUser.setPassword( new BCryptPasswordEncoder().encode(password) );
+        newUser.setPassword(new BCryptPasswordEncoder().encode(password));
         newUser.setEnabled(Boolean.TRUE);
-        // TODO Rest of signup fields
+        newUser.setFirstname(firstname);
+        newUser.setLastname(lastname);
+        newUser.setBirthday(bday);
         return systemUsers.save(newUser) != null;
     } 
 

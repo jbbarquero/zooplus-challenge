@@ -8,12 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data @NoArgsConstructor
+@Data
 @Entity 
 public class Users implements Serializable, UserDetails {
     @Id @Column(name="email", nullable=false) @NotNull
@@ -25,9 +24,20 @@ public class Users implements Serializable, UserDetails {
     @Column(name="enabled", nullable=false) @NotNull
     private boolean enabled;
 
+    @Column
+    private String firstname;
+
+    @Column
+    private String lastname;
+
+    @Column
+    private String birthday;
+
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("USER"), 
+                             new SimpleGrantedAuthority("SUPERUSER"));
     }
 
     @Override

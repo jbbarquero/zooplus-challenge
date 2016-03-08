@@ -1,6 +1,5 @@
 package com.josemorenoesteban.zooplus.challenge;
 
-import com.josemorenoesteban.zooplus.challenge.domain.UsersRepository;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
@@ -16,11 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-/**
- * http://docs.spring.io/spring-security/site/docs/3.2.x/guides/hellomvc.html
- * http://docs.spring.io/spring-security/site/docs/3.2.x/guides/form.html
- * http://o7planning.org/web/fe/default/en/document/29799/simple-login-web-application-using-spring-mvc-spring-security-and-spring-jdbc
- */
+import com.josemorenoesteban.zooplus.challenge.domain.UsersRepository;
+
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -66,5 +62,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    
 }

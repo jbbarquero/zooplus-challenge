@@ -63,8 +63,11 @@
         </div>
     </main>
     <footer>
-        <p>This is the footer</p>
-        <p>&copy;2016 github.com/jomoespe</p>
+        <ul>
+            <li>&copy;2016 github.com/jomoespe&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><strong>Monitoring and management:</strong></li>
+            <li><a href="/health"   target="_new">health</a></li>
+        </ul>
     </footer>
 </body>
 </html>

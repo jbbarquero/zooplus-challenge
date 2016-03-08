@@ -41,8 +41,10 @@
                     </select>
                     <button class="pure-button button-main">Get rate</button>
                     <fieldset>
-                    <label>1 USD = <strong>${rate.rate}</strong> ${rate.target}</label>
-
+                    <c:if test="${empty error}"><label>1 USD = <strong>${rate.rate}</strong> ${rate.target}</label></c:if>
+                    <%--c:if test="${not empty error}"><div>${error}</div></c:if--%>
+                    
+                    
                     <%-- Para mostras los errores
                     <c:if test="${not empty error}"><div>${error}</div></c:if>
                     <c:if test="${not empty message}"><div>${message}</div></c:if>
@@ -80,8 +82,8 @@
         </section>
     </main>
     <footer>
-        <p>&copy;2016 github.com/jomoespe</p>
         <ul>
+            <li>&copy;2016 github.com/jomoespe&nbsp;&nbsp;&nbsp;&nbsp;</li>
             <li><strong>Monitoring and management:</strong></li>
             <li><a href="/health"   target="_new">health</a></li>
             <li><a href="/beans"    target="_new">beans</a></li>

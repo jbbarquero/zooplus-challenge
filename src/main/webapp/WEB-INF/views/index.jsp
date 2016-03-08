@@ -80,8 +80,18 @@
         </section>
     </main>
     <footer>
-        <p>This is the footer</p>
         <p>&copy;2016 github.com/jomoespe</p>
+        <ul>
+            <li><strong>Monitoring and management:</strong></li>
+            <li><a href="/health"   target="_new">health</a></li>
+            <li><a href="/beans"    target="_new">beans</a></li>
+            <li><a href="/env"      target="_new">env</a></li>
+            <li><a href="/trace"    target="_new">trace</a></li>
+            <%--li><a href="/info"     target="_new">info</a></li--%>
+            <li><a href="/dump"     target="_new">dump</a></li>
+            <li><a href="/mappings" target="_new">mappings</a></li>
+            <li><a href="/metrics"  target="_new">metrics</a></li>
+        </ul>
     </footer>
 </body>
 </html>

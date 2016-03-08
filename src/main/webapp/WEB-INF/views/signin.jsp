@@ -35,7 +35,7 @@
             <div class="pure-u-1-2">
                 <article>
                     <p>This is my solution to the Zooplus Challenge.</p>
-                    <p>Your can see <a href="#">a presentation</a> about how is built and why I take some solutions.</p>
+                    <p>Here you can see <a href="#">a presentation</a> about how is built and why I take some solutions.</p>
                     <p><strong>SECURITY WARNING!</strong> This is not a <em>full hardened server</em> and is 
                             not under a <em>bastion host</em>, so, although I use HTTPS and the passwords 
                             are stored encrypted, you should not provide any real world credentials.</p>

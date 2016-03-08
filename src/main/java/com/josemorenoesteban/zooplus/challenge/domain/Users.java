@@ -1,16 +1,21 @@
 package com.josemorenoesteban.zooplus.challenge.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data @NoArgsConstructor
 @Entity 
-public class Users implements Serializable {
+public class Users implements Serializable, UserDetails {
     @Id @Column(name="email", nullable=false) @NotNull
     private String email;
     
@@ -18,5 +23,30 @@ public class Users implements Serializable {
     private String password;
 
     @Column(name="enabled", nullable=false) @NotNull
-    private Boolean enabled;
+    private boolean enabled;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 }

@@ -1,9 +1,8 @@
 package com.josemorenoesteban.zooplus.challenge;
 
+import com.josemorenoesteban.zooplus.challenge.domain.UsersRepository;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -14,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -24,16 +24,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired private DataSource dataSource;
+    //@Autowired private DataSource dataSource;
+    @Autowired private UsersRepository usersRepository;
     
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-            .dataSource(dataSource)
-            .passwordEncoder( new BCryptPasswordEncoder() )
-            .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email=?")
-            .authoritiesByUsernameQuery("SELECT email, 'user' FROM users WHERE email=?");
-        
+        auth.userDetailsService(userDetailsService())
+            .passwordEncoder( new BCryptPasswordEncoder() );
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        return (String username) -> usersRepository.findOne(username);
     }
 
     @Override

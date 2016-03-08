@@ -21,69 +21,67 @@
             <h2>the solution to the challenge</h2>
         </div>
         <div class="pure-u-1-4">
-            <span>{the name here}</span>
             <form id="logout" action="logout" method="post" >
+                <label>Hi ${requestScope.userPrincipal.email}!</label>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button>logout</button>
+                <button id="logout">logout</button>
             </form>
-            <%-- Display username >
-            <span>${httpServletRequest.remoteUser}</span>
-            <form th:action="logout" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <input type="submit" value="Log out" />
-            </form>
-            --%>
         </div>
     </header>
+    <main>
+        <section id="form_container" class="pure-g">
+            <div class="pure-u-1-8"></div>
+            <div class="pure-u">
+                <h3>get a current exchange rate</h3>
+                <form action="rate" class="pure-form">
+                    <fieldset>
+                    <select name="target">
+                        <c:forEach var="currency" items="${currencies}"><option value="${currency.currencyCode}"> ${currency.currencyCode} ${currency.displayName}</option>
+                        </c:forEach>
+                    </select>
+                    <button class="pure-button button-main">Get rate</button>
+                    <fieldset>
+                    <label>1 USD = <strong>${rate.rate}</strong> ${rate.target}</label>
 
-    <section id="form_container" class="pure-g">
-        <div class="pure-u-1-8"></div>
-        <div class="pure-u">
-            <h3>get a current exchange rate</h3>
-            <form action="rate" class="pure-form">
-                <fieldset>
-                <select name="target">
-                    <c:forEach var="currency" items="${currencies}"><option value="${currency.currencyCode}"> ${currency.currencyCode} ${currency.displayName}</option>
+                    <%-- Para mostras los errores
+                    <c:if test="${not empty error}"><div>${error}</div></c:if>
+                    <c:if test="${not empty message}"><div>${message}</div></c:if>
+                    --%>
+                </form>
+            </div>
+            <div class="pure-u-1-8"></div>                
+        </section>
+
+        <section id="searchs_container" class="pure-g">
+            <div class="pure-u-3-24"></div>
+            <div class="pure-u">
+                <h3>the last queries</h3>
+                <table class="pure-table pure-table-horizontal pure-table-striped">
+                    <%--caption>Last searchs....</caption--%>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Base</th>
+                            <th>Target</th>
+                            <th>Exchange rate</th>
+                        </tr>
+                    </thead>
+                    <c:forEach var="exchange" items="${searchs}">
+                        <tr>
+                            <td>${exchange.rateDate}</td>
+                            <td>${exchange.source}</td>
+                            <td>${exchange.target}</td>
+                            <td>${exchange.rate}</td>
+                        </tr>
                     </c:forEach>
-                </select>
-                <button class="pure-button button-main">Get rate</button>
-                <fieldset>
-                <label>1 USD = <strong>${rate.rate}</strong> ${rate.target}</label>
-
-                <%-- Para mostras los errores
-                <c:if test="${not empty error}"><div>${error}</div></c:if>
-                <c:if test="${not empty message}"><div>${message}</div></c:if>
-                --%>
-            </form>
-        </div>
-        <div class="pure-u-1-8"></div>                
-    </section>
-                
-    <section id="searchs_container" class="pure-g">
-        <div class="pure-u-3-24"></div>
-        <div class="pure-u">
-            <h3>the last queries</h3>
-            <table class="pure-table pure-table-horizontal pure-table-striped">
-                <%--caption>Last searchs....</caption--%>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Base</th>
-                        <th>Target</th>
-                        <th>Exchange rate</th>
-                    </tr>
-                </thead>
-                <c:forEach var="exchange" items="${searchs}">
-                    <tr>
-                        <td>${exchange.rateDate}</td>
-                        <td>${exchange.source}</td>
-                        <td>${exchange.target}</td>
-                        <td>${exchange.rate}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-        <div class="pure-u-2-24"></div>                
-    </section>
+                </table>
+            </div>
+            <div class="pure-u-2-24"></div>                
+        </section>
+    </main>
+    <footer>
+        <p>This is the footer</p>
+        <p>&copy;2016 github.com/jomoespe</p>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,22 @@
 @import 'pure/0.6.0/pure-min.css';
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+header {
+    flex: none;
+}
 
 header form {
     font-size: 10pt;
@@ -13,11 +29,20 @@ header form input {
     border-radius: 3px;
 }
 
+footer {
+    flex: none;
+    /*position:fixed;*/
+    bottom:0;
+    /*width:100%;*/
+    background: linear-gradient(to bottom, transparent, #eaeded);
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
 h1 {
     background-image: url("images/zooplus_logo.png");
     background-repeat: no-repeat;
     color: transparent;
-    height: 56px;
+    height: 54px;
     margin-left: 40px;
 }
 
@@ -25,6 +50,7 @@ h2 {
     font-family: 'Quicksand', sans-serif;
     margin-left: 40px;
     color: rgb(69, 84, 69);
+    text-shadow: 2px 2px #d3d3d3;
 }
 
 h3 {
@@ -43,6 +69,12 @@ article a {
     color: rgb(0, 64, 128);
     text-decoration: none;
     border-bottom: 1px solid rgb(204, 0, 0);
+}
+
+button#logout {
+    border: none;
+    background-color: transparent; 
+    text-decoration: underline;
 }
 
 .button-main {

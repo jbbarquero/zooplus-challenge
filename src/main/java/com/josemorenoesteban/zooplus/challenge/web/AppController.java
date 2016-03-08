@@ -22,8 +22,8 @@ import com.josemorenoesteban.zooplus.challenge.service.UserAgent;
 public class AppController {
     public static final String DEFAULT_SOUCE = "USD";
     
-    @Autowired @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManagerBean;
+//    @Autowired @Qualifier("authenticationManagerBean")
+//    private AuthenticationManager authenticationManagerBean;
     @Autowired private ExchangeRateAgent     exchangeAgent;
     @Autowired private UserAgent             agentAgent;
 
@@ -31,7 +31,7 @@ public class AppController {
     public String home(final Model model) {
         model.addAttribute("currencies", exchangeAgent.currencies());
         model.addAttribute("searchs",    exchangeAgent.lastQueries());
-
+        model.addAttribute("error",      null);
         return "index"; 
     }
     
@@ -43,6 +43,7 @@ public class AppController {
         model.addAttribute("currencies", exchangeAgent.currencies());
         model.addAttribute("searchs",    response.getLatstSearches());
         model.addAttribute("rate",       response.getCurrent());
+        model.addAttribute("error",      response.getIssue().getMessage());
         return "index"; 
     }
 
@@ -67,12 +68,8 @@ public class AppController {
                          @RequestParam(value="password",   required=false) String password,
                          @RequestParam(value="repassword", required=false) String repassword,
                          final Model model) {
-        if (agentAgent.signup(firstname, lastname, email, bday, password)) {
-            Authentication auth = authenticationManagerBean.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            return auth.isAuthenticated() ? "index" : "signin";
-        } else {
-            return "signin";
-        }
+        return agentAgent.signup(firstname, lastname, email, bday, password)
+               ? home(model) 
+               : "signin";
     }
 }

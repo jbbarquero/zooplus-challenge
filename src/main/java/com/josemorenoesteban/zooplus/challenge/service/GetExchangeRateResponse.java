@@ -7,21 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import com.josemorenoesteban.zooplus.challenge.domain.ExchangeRate;
-import java.util.ArrayList;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class GetExchangeRateResponse {
-    public enum Issue { NO_CONNECTION_TO_SERVER };
-    
     public List<ExchangeRate> latstSearches;
     public ExchangeRate       current;
-    public List<Issue>        issues = new ArrayList();
+    public Issue              issue = Issue.NO_ISSUE;
     
-    public boolean hasIssues() { 
-        return !issues.isEmpty(); 
-    }
+    public static enum Issue {
+        NO_ISSUE(""),
+        NO_CONNECTION_TO_SERVER("Communication error with exchange rate server");
+        
+        private final String message;
+        
+        Issue(String message){
+            this.message = message;
+        }
 
-    public boolean hasIssue(final Issue issue) { 
-        return issues.contains(issue); 
+        public String getMessage() {
+            return message;
+        }
     }
 }

@@ -28,9 +28,8 @@ public class ExchangeRateAgent {
         GetExchangeRateResponse response = new GetExchangeRateResponse();
         
         response.setLatstSearches(lastQueries());
-
         currentExchangeRate(response, source, target);
-        if (!response.hasIssues()) {
+        if (response.issue==NO_ISSUE) {
             response.getCurrent().setRequestTimestamp(System.currentTimeMillis());
             exchangeRates.save(response.getCurrent());
         }
@@ -65,7 +64,7 @@ public class ExchangeRateAgent {
     }
     
     private void currentExchangeRate(final GetExchangeRateResponse response, final String source, 
-                                             final String target) {
+                                     final String target) {
         ExchangeRate exchangeRate;
         try {
             exchangeRate = exchangeService.get(source, target);
@@ -81,7 +80,7 @@ public class ExchangeRateAgent {
             exchangeRate.setRateTimestamp(now);
             exchangeRate.setRate(-1F);
             
-            response.getIssues().add(NO_CONNECTION_TO_SERVER);
+            response.setIssue(NO_CONNECTION_TO_SERVER);
         }
         response.setCurrent(exchangeRate);
     }

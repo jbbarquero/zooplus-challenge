@@ -22,7 +22,7 @@
         </div>
         <div class="pure-u-1-4">
             <form id="logout" action="logout" method="post" >
-                <label>Hi ${requestScope.userPrincipal.email}!</label>
+                <label>Hi ${pageContext.request.userPrincipal.name}!</label>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button id="logout">logout</button>
             </form>

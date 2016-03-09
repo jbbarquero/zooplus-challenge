@@ -84,6 +84,8 @@
     <footer>
         <ul>
             <li>&copy;2016 github.com/jomoespe&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            <li><a href="https://github.com/jomoespe/zooplus-challenge"    target="_new">GitHub</a></li>
+            <li><a href="https://travis-ci.org/jomoespe/zooplus-challenge" target="_new">Travis IC</a></li>
             <li><strong>Monitoring and management:</strong></li>
             <li><a href="/health"   target="_new">health</a></li>
             <li><a href="/beans"    target="_new">beans</a></li>

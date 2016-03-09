@@ -37,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                .antMatchers(GET,  "/favicon.ico", "/style/**").permitAll()
+                .antMatchers(GET,  "/favicon.ico", "/presentation", "/style/**", 
+                                   "/images/**", "/script/**").permitAll()
                 .antMatchers(POST, "/signup").permitAll()
                 .anyRequest().authenticated() // .hasAnyRole("user")
                 .and()

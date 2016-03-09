@@ -45,18 +45,18 @@
                 <h3>Sign Up</h3>
                 <form name="signup" action="signup" method="post" class="pure-form">
                     <fieldset class="pure-group">
-                        <input type="text"  name="firstname"  placeholder="First name">
-                        <input type="text"  name="lastname"   placeholder="Last name">
-                        <input type="email" name="email"      placeholder="Email">
-                        <input type="date"  name="bday"       placeholder="Birth day">
+                        <input type="text"  name="firstname"  class="pure-input-1" placeholder="First name">
+                        <input type="text"  name="lastname"   class="pure-input-1" placeholder="Last name">
+                        <input type="email" name="email"      class="pure-input-1" placeholder="Email">
+                        <input type="date"  name="bday"       class="pure-input-1" placeholder="Birth day">
                     </fieldset>
                     <fieldset class="pure-group">
-                        <input type="password" name="password"   placeholder="Password">
-                        <input type="password" name="repassword" placeholder="Re-enter password">
+                        <input type="password" name="password"   class="pure-input-1" placeholder="Password" >
+                        <input type="password" name="repassword" class="pure-input-1" placeholder="Re-enter password">
                         <!-- Address (street, zip, city & country)  -->
                     </fieldset>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+                    <button type="submit" class="pure-button pure-input-1 pure-button-primary">Sign Up</button>
                 </form>
             </div>
             <div class="pure-u-1-8"></div>

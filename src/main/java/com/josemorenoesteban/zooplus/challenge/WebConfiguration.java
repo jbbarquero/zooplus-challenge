@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * Aquí se define los componentes que hacen funcionar a MVC. Es equivalente al /WEB-INF/spring-mvc-config.xml
  */
 @Configuration
-// @EnableWebMvc
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean

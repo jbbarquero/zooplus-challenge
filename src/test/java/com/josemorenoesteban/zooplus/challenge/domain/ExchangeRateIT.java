@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.jdbc.JdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.josemorenoesteban.zooplus.challenge.Application;
 
@@ -32,29 +34,32 @@ public class ExchangeRateIT {
     }
 
     @Test
+    @Transactional
     public void testSave() {
-        exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 1f, null));
-        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 2f, null));
-        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 3f, null));
-        exchangeRates.save(create("USD", "GBP", System.currentTimeMillis(), 4f, null));
-        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 5f, null));
-        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 6f, null));
+        exchangeRates.save(create("USD", "EUR", System.nanoTime(), 1f, null));
+        exchangeRates.save(create("USD", "JPY", System.nanoTime(), 2f, null));
+        exchangeRates.save(create("USD", "AUD", System.nanoTime(), 3f, null));
+        exchangeRates.save(create("USD", "GBP", System.nanoTime(), 4f, null));
+        exchangeRates.save(create("USD", "JPY", System.nanoTime(), 5f, null));
+        exchangeRates.save(create("USD", "AUD", System.nanoTime(), 6f, null));
         exchangeRates.flush();
 
-        // TODO assertEquals(6, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchangeRate"));
+        assertEquals(6, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchange_Rate"));
 
         // get the n las elements
         Pageable topTen = new PageRequest(0, 10, Sort.Direction.DESC, "requestTimestamp");
         List<ExchangeRate> last10 = exchangeRates.findAll(topTen).getContent();
         assertEquals(6, last10.size());
 
-        exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 7f, null));
-        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 8f, null));
-        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 9f, null));
-        exchangeRates.save(create("USD", "EUR", System.currentTimeMillis(), 10f, null));
-        exchangeRates.save(create("USD", "JPY", System.currentTimeMillis(), 11f, null));
-        exchangeRates.save(create("USD", "AUD", System.currentTimeMillis(), 12f, null));
-        // TODO assertEquals(12, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchangeRate"));
+        exchangeRates.save(create("USD", "EUR", System.nanoTime(), 7f, null));
+        exchangeRates.save(create("USD", "JPY", System.nanoTime(), 8f, null));
+        exchangeRates.save(create("USD", "AUD", System.nanoTime(), 9f, null));
+        exchangeRates.save(create("USD", "EUR", System.nanoTime(), 10f, null));
+        exchangeRates.save(create("USD", "JPY", System.nanoTime(), 11f, null));
+        exchangeRates.save(create("USD", "AUD", System.nanoTime(), 12f, null));
+        exchangeRates.flush();
+
+        assertEquals(12, JdbcTestUtils.countRowsInTable(jdbcTemplate, "exchange_Rate"));
 
         topTen = new PageRequest(0, 10, Sort.Direction.DESC, "requestTimestamp");
         last10 = exchangeRates.findAll(topTen).getContent();

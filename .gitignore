@@ -16,3 +16,8 @@ nbdist/
 nbactions.xml
 .nb-gradle/
 nb-configuration.xml
+
+# Eclipse Project Files #
+.classpath
+.project
+.settings

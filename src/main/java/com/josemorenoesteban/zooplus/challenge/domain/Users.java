@@ -1,27 +1,34 @@
 package com.josemorenoesteban.zooplus.challenge.domain;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Data;
+
 @Data
-@Entity 
+@Entity
 public class Users implements Serializable, UserDetails {
-    @Id @Column(name="email", nullable=false) @NotNull
+
+    @Id
+    @Column(name = "email", nullable = false)
+    @NotNull
     private String email;
-    
-    @Column(name="password", nullable=false) @NotNull
+
+    @Column(name = "password", nullable = false)
+    @NotNull
     private String password;
 
-    @Column(name="enabled", nullable=false) @NotNull
+    @Column(name = "enabled", nullable = false)
+    @NotNull
     private boolean enabled;
 
     @Column
@@ -33,11 +40,11 @@ public class Users implements Serializable, UserDetails {
     @Column
     private String birthday;
 
-    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER"), 
-                             new SimpleGrantedAuthority("SUPERUSER"));
+        return AuthorityUtils.createAuthorityList("USER", "SUPERUSER", "ROLE_SUPERUSER");
+        // return Arrays.asList(new SimpleGrantedAuthority("USER"),
+        // new SimpleGrantedAuthority("SUPERUSER"));
     }
 
     @Override
